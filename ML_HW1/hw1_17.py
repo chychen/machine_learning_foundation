@@ -29,6 +29,7 @@ def PLA():
     shuffled_index_list = np.arange(myarray.shape[0])
     total_counter = 2000
     sum_update_counter = 0
+    learning_rate = 0.5
     while total_counter:
         # shuffle
         np.random.shuffle(shuffled_index_list)
@@ -48,7 +49,7 @@ def PLA():
                 if sign_classifier(weight, X) != int(Y):
                     if_stop_update = False
                     update_counter += 1
-                    weight = weight + Y * X
+                    weight = weight + learning_rate * Y * X
         print("total update %d times" % update_counter)
         sum_update_counter += update_counter
     print("mean update %d times" % (sum_update_counter/2000.0))

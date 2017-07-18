@@ -8,8 +8,8 @@ import numpy as np
 def sign_classifier(weights, inputs):
     """
     input:
-        weight: shape=[4,]
-        input: shape=[4,]
+        weight: shape=[5,]
+        input: shape=[5,]
     """
     result = np.dot(weights, inputs)
     if result > 0:

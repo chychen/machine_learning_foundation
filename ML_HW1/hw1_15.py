@@ -5,7 +5,7 @@ from __future__ import print_function
 import numpy as np
 
 
-def sign(weights, inputs):
+def sign_classifier(weights, inputs):
     """
     input:
         weight: shape=[4,]
@@ -18,10 +18,13 @@ def sign(weights, inputs):
         return -1
 
 
-def main():
+def PLA():
+    """
+    implementation of Percepture Learning Algorithm
+    """
     myarray = np.loadtxt('hw1_15_train.txt')
-    print(myarray.shape)
-    print(myarray.dtype)
+    print("input shape:", myarray.shape)
+    print("input dtype:", myarray.dtype)
 
     update_counter = 0
     weight = np.zeros(shape=[5], dtype=float)
@@ -32,7 +35,7 @@ def main():
             # X[0] as bias
             X = np.concatenate([[1], v[0:4]])
             Y = v[-1]
-            if sign(weight, X) != int(Y):
+            if sign_classifier(weight, X) != int(Y):
                 if_stop_update = False
                 update_counter += 1
                 weight = weight + Y * X
@@ -41,4 +44,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    PLA()

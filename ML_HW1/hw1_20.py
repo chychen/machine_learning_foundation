@@ -69,7 +69,7 @@ def pocket_PLA():
         for _, v in enumerate(test_data):
             X = np.concatenate([[1], v[0:4]])
             Y = v[-1]
-            if sign_classifier(weight, X) != int(Y):
+            if sign_classifier(res_weight, X) != int(Y):
                 error_counter += 1
         error_rate = error_counter / test_data.shape[0]
         print("error rate %f" % error_rate)

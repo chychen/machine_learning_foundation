@@ -50,6 +50,7 @@ def pocket_PLA():
                 if sign_classifier(weight, X) != int(Y):
                     weight_candidate = weight + Y * X
                     weight = weight_candidate
+                    update_counter += 1
                     # verify weight_candidate is better or not
                     candidate_success_predict_counter = 0
                     for _, v2 in enumerate(train_data):
@@ -60,21 +61,19 @@ def pocket_PLA():
                     if candidate_success_predict_counter > success_predict_counter:
                         success_predict_counter = candidate_success_predict_counter
                         res_weight = weight_candidate
-                        print("find better!!")
+                        # print("find better!!")
                 if update_counter >= 50:
                     break
-            update_counter += 1
-            print("update_counter:", update_counter)
-        print("----------------------------------")
         # testing
         error_counter = 0
         for _, v in enumerate(test_data):
             X = np.concatenate([[1], v[0:4]])
             Y = v[-1]
-            if sign_classifier(weight, X) != int(Y):
+            if sign_classifier(res_weight, X) != int(Y):
                 error_counter += 1
         error_rate = error_counter / test_data.shape[0]
         print("error rate %f" % error_rate)
+        print("----------------------------------")
         sum_error_rate += error_rate
         # input()
     print("mean error rate %f" % (sum_error_rate / 2000.0))
